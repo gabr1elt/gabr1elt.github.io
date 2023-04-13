@@ -1,13 +1,14 @@
-# Workflow for building and deploying a XXXXX site to GitHub Pages
+# Workflow for building and deploying a Quasar site to GitHub Pages
 #
-name: Deploy XXXXX site to Pages
+name: Deploy Quasar site to Pages
 
 on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
   # Runs on pushes targeting the default branch
   push:
-    branches: ["main"]
+    branches: 
+      - main
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -30,6 +31,8 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Detect package manager
         id: detect-package-manager
@@ -47,45 +50,41 @@ jobs:
             exit 1
           fi
 
-      - name: Setup Node or Yarn
+      - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: "16"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
 
-
-
       - name: Setup Pages
         uses: actions/configure-pages@v3
-        with:
-          # Automatically inject router.base in your Nuxt configuration file and set
-          # target to static (https://nuxtjs.org/docs/configuration-glossary/configuration-target/).
-          #
-          # You may remove this line if you want to manage the configuration yourself.
-          static_site_generator: nuxt
+      #   with:
+      #     # Automatically inject router.base in your Nuxt configuration file and set
+      #     # target to static (https://nuxtjs.org/docs/configuration-glossary/configuration-target/).
+      #     #
+      #     # You may remove this line if you want to manage the configuration yourself.
+      #     static_site_generator: nuxt
 
-      - name: Restore cache
-        uses: actions/cache@v3
-        with:
-          path: |
-            dist
-            .nuxt
-          key: ${{ runner.os }}-nuxt-build-${{ hashFiles('dist') }}
-          restore-keys: |
-            ${{ runner.os }}-nuxt-build-
+      # - name: Restore cache
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: |
+      #       dist
+      #       .nuxt
+      #     key: ${{ runner.os }}-nuxt-build-${{ hashFiles('dist') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-nuxt-build-
 
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
 
-      - name: Static HTML export with Nuxt
-        run: ${{ steps.detect-package-manager.outputs.manager }} run generate
-
-
+      - name: Build SPA with Quasar
+        run: ${{ steps.detect-package-manager.outputs.manager }} run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: ./dist
+          path: ./dist/spa
 
   # Deployment job
   deploy:
