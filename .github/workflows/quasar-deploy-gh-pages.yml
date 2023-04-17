@@ -28,7 +28,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      PAGE_RELATIVE_PATH: quasar-project
+      PAGE_RELATIVE_PATH: gabrieltorcat
     steps:
 
       - name: Checkout
