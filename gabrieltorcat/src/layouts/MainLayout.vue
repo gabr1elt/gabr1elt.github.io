@@ -7,6 +7,3 @@
 
   </q-layout>
 </template>
-
-<script>
-</script>
