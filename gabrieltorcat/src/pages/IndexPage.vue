@@ -1,7 +1,7 @@
 <template>
   <q-page class="row items-center justify-center bg-primary">
 
-    <q-card class="q-page-outer bg-primary q-px-xl" flat square>
+    <q-card class="q-page-outer bg-primary" :class="$q.screen.gt.xs ? ' q-px-xl' : ' q-px-lg'" flat square>
 
       <!-- Picture -->
       <q-card-section class="row items-center justify-center">
