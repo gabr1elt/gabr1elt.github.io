@@ -64,6 +64,8 @@
 
 <script setup>
 
+// import { fa-regular fa-microchip-ai } from '@quasar/extras/fontawesome-v6'
+
 const subTitle = "INNOVATION / TECHNOLOGY / X06";
 const profile =
   `Firm promoter of Innovation and the Work Smarter and Not Harder Principle. I don't Believe in Problems, I Believe in Solutions. 
