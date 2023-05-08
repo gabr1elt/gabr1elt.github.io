@@ -26,12 +26,30 @@
 
       <!-- Buttons -->
       <q-card-actions align="around">
-        <q-btn round color="secondary" text-color="primary" :size="$q.screen.gt.sm ? 'lg' : 'md'" icon="mail" />
-        <q-btn round color="secondary" text-color="primary" :size="$q.screen.gt.sm ? 'lg' : 'md'" icon="description" />
-        <q-btn round color="secondary" text-color="primary" :size="$q.screen.gt.sm ? 'lg' : 'md'"
-          icon="fa-brands fa-linkedin-in" />
-        <q-btn round color="secondary" text-color="primary" :size="$q.screen.gt.sm ? 'lg' : 'md'"
-          icon="fa-regular fa-microchip-ai" />
+
+        <!-- Mail -->
+        <q-btn round color="secondary" text-color="primary" :size="$q.screen.gt.sm ? 'lg' : 'md'" icon="mail"
+          :href="'mailto:' + emailAddress" />
+        <!-- :href="'mailto:' + emailAddress + '?subject=' + emailSubject" /> -->
+
+        <!-- Resume -->
+        <q-btn round color="secondary" text-color="primary" :size="$q.screen.gt.sm ? 'lg' : 'md'" icon="description"
+          type="application/pdf" :href="resumeUrl" target="_blank" />
+        <!-- type="application/pdf" href="assets/resume/Resume.pdf" target="_blank" download="Gabriel Torcat - Resume" /> -->
+
+        <!-- LinkedIn -->
+        <q-btn round color="secondary" text-color="primary" :size="$q.screen.gt.sm ? 'lg' : 'md'" :href="linkedinUrl"
+          target="_blank">
+          <q-icon size="md" name="fa-brands fa-linkedin-in" />
+          <!-- <q-icon size="md" name="fa-brands fa-linkedin-in fa-bounce" /> -->
+        </q-btn>
+
+        <!-- AI -->
+        <q-btn round color="secondary" text-color="primary" :size="$q.screen.gt.sm ? 'lg' : 'md'">
+          <q-icon size="lg" name="img:/icons/ai/ai_microchip.svg" />
+          <q-badge color="orange" floating>new</q-badge>
+        </q-btn>
+
       </q-card-actions>
 
       <!-- Profile -->
@@ -64,9 +82,12 @@
 
 <script setup>
 
-// import { fa-regular fa-microchip-ai } from '@quasar/extras/fontawesome-v6'
+import resumeUrl from 'assets/resume/Resume.pdf?url'
 
 const subTitle = "INNOVATION / TECHNOLOGY / X06";
+const emailAddress = "contact@gabrieltorcat.com";
+// const emailSubject = "Contact Request";
+const linkedinUrl = "https://www.linkedin.com/in/gabriel-torcat/"
 const profile =
   `Firm promoter of Innovation and the Work Smarter and Not Harder Principle. I don't Believe in Problems, I Believe in Solutions. 
   A scientist at heart, I apply critical and strategic thinking to materialize solid and cutting-edge business solutions to improve performance, 
