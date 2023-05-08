@@ -32,6 +32,8 @@ RUN apt-get update && \
         wget \
         ca-certificates \
         # libsndfile1-dev \
+        podman \
+        # docker.io \
         python3 \
         python3-pip \
         python3-venv && \
@@ -41,7 +43,7 @@ RUN apt-get update && \
 
 # Install Node Version Manager
 
-curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash -
+RUN curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash -
 # # Verify installation
 # command -v nvm
 
