@@ -40,13 +40,13 @@
         <!-- LinkedIn -->
         <q-btn round color="secondary" text-color="primary" :size="$q.screen.gt.sm ? 'lg' : 'md'" :href="linkedinUrl"
           target="_blank">
-          <q-icon size="md" name="fa-brands fa-linkedin-in" />
-          <!-- <q-icon size="md" name="fa-brands fa-linkedin-in fa-bounce" /> -->
+          <q-icon :size="$q.screen.gt.sm ? 'md' : 'sm'" name="fa-brands fa-linkedin-in" />
+          <!-- <q-icon :size="$q.screen.gt.sm ? 'md' : 'sm'" name="fa-brands fa-linkedin-in fa-bounce" /> -->
         </q-btn>
 
         <!-- AI -->
         <q-btn round color="secondary" text-color="primary" :size="$q.screen.gt.sm ? 'lg' : 'md'">
-          <q-icon size="lg" name="img:/icons/ai/ai_microchip.svg" />
+          <q-icon :size="$q.screen.gt.sm ? 'lg' : 'md'" name="img:/icons/ai/ai_microchip.svg" />
           <q-badge color="orange" floating>new</q-badge>
         </q-btn>
 
