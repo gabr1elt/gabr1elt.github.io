@@ -5,23 +5,20 @@
 
       <!-- Picture -->
       <q-card-section class="row items-center justify-center">
-        <div style="width: 45%; aspect-ratio: 1; min-width: 250px;">
-          <q-avatar style="width: 100%; height: 100%;" color="secondary" v-morph:regular:picture="morphGroup_picture">
+
+        <div style="width: 45%; aspect-ratio: 1; min-width: 250px;" v-if="!ai_active">
+          <q-avatar style="width: 100%; height: 100%;" color="secondary">
             <img src="~assets/images/Portrait_silouette_small.png" />
             <!-- <img src="~assets/images/Portrait_circle_small.png"> -->
           </q-avatar>
-          <q-img src="~assets/images/Portrait_small.png" v-morph:ai:picture:3000.tween="morphGroup_picture" />
         </div>
+
+        <!-- AI -->
+        <div style="width: 45%; aspect-ratio: 1; min-width: 250px;" v-if="ai_active">
+          <q-img src="~assets/ai/2023-05-08T00:42:49.659567.png" />
+        </div>
+
       </q-card-section>
-
-      <!-- AI Picture -->
-      <!-- 
-      <q-card-section class="row items-center justify-center" v-morph:ai:picture="morphGroup_picture">
-        <div style="width: 45%; aspect-ratio: 1; min-width: 250px;">
-          <q-img src="~assets/images/Portrait_small.png" />
-        </div>
-
-      </q-card-section> -->
 
       <!-- Title -->
       <q-card-section>
@@ -39,44 +36,66 @@
 
         <!-- Mail -->
         <q-btn round color="secondary" text-color="primary" :size="$q.screen.gt.sm ? 'lg' : 'md'" icon="mail"
-          :href="'mailto:' + emailAddress" />
-        <!-- :href="'mailto:' + emailAddress + '?subject=' + emailSubject" /> -->
+          :href="'mailto:' + emailAddress">
+          <q-tooltip :class="$q.screen.lt.sm ? 'q-pa-xs' : ''" class="text-caption" :delay="500" anchor="bottom right"
+            self="center middle">Email</q-tooltip>
+          <!-- :href="'mailto:' + emailAddress + '?subject=' + emailSubject" /> -->
+        </q-btn>
 
         <!-- Resume -->
         <q-btn round color="secondary" text-color="primary" :size="$q.screen.gt.sm ? 'lg' : 'md'" icon="description"
-          type="application/pdf" :href="resumeUrl" target="_blank" />
-        <!-- type="application/pdf" href="assets/resume/Resume.pdf" target="_blank" download="Gabriel Torcat - Resume" /> -->
+          type="application/pdf" :href="resumeUrl" target="_blank">
+          <!-- type="application/pdf" href="assets/resume/Resume.pdf" target="_blank" download="Gabriel Torcat - Resume" /> -->
+          <q-tooltip :class="$q.screen.lt.sm ? 'q-pa-xs' : ''" class="text-caption" :delay="500" anchor="bottom right"
+            self="center middle">Resume</q-tooltip>
+        </q-btn>
 
         <!-- LinkedIn -->
         <q-btn round color="secondary" text-color="primary" :size="$q.screen.gt.sm ? 'lg' : 'md'" :href="linkedinUrl"
           target="_blank">
           <q-icon :size="$q.screen.gt.sm ? 'md' : 'sm'" name="fa-brands fa-linkedin-in" />
           <!-- <q-icon :size="$q.screen.gt.sm ? 'md' : 'sm'" name="fa-brands fa-linkedin-in fa-bounce" /> -->
+          <q-tooltip :class="$q.screen.lt.sm ? 'q-pa-xs' : ''" class="text-caption" :delay="500" anchor="bottom right"
+            self="center middle">LinkedIn</q-tooltip>
         </q-btn>
 
         <!-- AI -->
-        <q-btn round color="secondary" text-color="primary" :size="$q.screen.gt.sm ? 'lg' : 'md'" @click="ai_usePic">
-          <q-icon :size="$q.screen.gt.sm ? 'lg' : '29px'" name="img:/icons/ai/ai_microchip.svg" />
+        <q-btn round color="secondary" text-color="primary" :size="$q.screen.gt.sm ? 'lg' : 'md'"
+          @click="ai_active = !ai_active">
+          <q-icon :size="$q.screen.gt.sm ? '42px' : '29px'" name="img:/icons/ai/ai_microchip.svg" />
           <q-badge color="orange" floating>New</q-badge>
+          <q-tooltip :class="$q.screen.lt.sm ? 'q-pa-xs' : ''" class="text-caption" :delay="500" anchor="bottom right"
+            self="center middle">Artificial Intelligence</q-tooltip>
         </q-btn>
 
-        <q-fab round color="secondary" text-color="primary" :padding="$q.screen.gt.sm ? '20px' : 'sm'"
+        <!-- <q-fab round color="secondary" text-color="primary" :padding="$q.screen.gt.sm ? '20px' : 'sm'"
           icon="img:/icons/ai/ai_microchip.svg" direction="up">
           <q-icon :size="$q.screen.gt.sm ? 'lg' : 'md'" name="img:/icons/ai/ai_microchip.svg" />
           <q-badge color="orange" floating>New</q-badge>
           <q-fab-action icon="alarm"></q-fab-action>
-        </q-fab>
+        </q-fab> -->
 
       </q-card-actions>
 
       <!-- Profile -->
-      <q-card-section class="">
+      <q-card-section class="" v-if="!ai_active">
         <h2 :class="$q.screen.gt.sm ? 'text-h2 q-my-lg' : 'text-h3 q-my-md'" class="text-left text-secondary">
           Profile
         </h2>
         <div :class="$q.screen.gt.sm ? 'text-body1' : 'text-body2'" class="text-center text-justify text-secondary"
           style="text-indent: 30px">
           {{ profile }}
+        </div>
+      </q-card-section>
+
+      <!-- AI Info -->
+      <q-card-section class="" v-if="ai_active">
+        <h2 :class="$q.screen.gt.sm ? 'text-h2 q-my-lg' : 'text-h3 q-my-md'" class="text-left text-secondary">
+          Info
+        </h2>
+        <div :class="$q.screen.gt.sm ? 'text-body1' : 'text-body2'" class="text-center text-justify text-secondary"
+          style="text-indent: 30px">
+          {{ ai_info }}
         </div>
       </q-card-section>
 
@@ -101,9 +120,6 @@
 import { ref } from 'vue'
 import resumeUrl from 'assets/resume/Resume.pdf?url'
 
-// ai transition
-const morphGroup_picture = ref("regular")
-
 // info
 const subTitle = "INNOVATION / TECHNOLOGY / X06";
 const emailAddress = "contact@gabrieltorcat.com";
@@ -116,10 +132,14 @@ const profile =
 
 // ai
 
-function ai_usePic() {
+const ai_active = ref(false)
+const ai_info =
+  `AI kdflknwflnwflwsndklw wfkhwkfhwkfn w;kfnw;kf wn ;wkfjw;kf w;kf.`;
 
-  morphGroup_picture.value = "ai"
+function aiToggle() {
 
+  // morphGroupVal.value = "ai"
+  morphGroupVal.value = morphGroupVal.value === "ai" ? "regular" : "ai"
 
 }
 
