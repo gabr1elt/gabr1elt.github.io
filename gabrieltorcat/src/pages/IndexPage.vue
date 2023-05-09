@@ -6,12 +6,22 @@
       <!-- Picture -->
       <q-card-section class="row items-center justify-center">
         <div style="width: 45%; aspect-ratio: 1; min-width: 250px;">
-          <q-avatar style="width: 100%; height: 100%;" color="secondary">
+          <q-avatar style="width: 100%; height: 100%;" color="secondary" v-morph:regular:picture="morphGroup_picture">
             <img src="~assets/images/Portrait_silouette_small.png" />
             <!-- <img src="~assets/images/Portrait_circle_small.png"> -->
           </q-avatar>
+          <q-img src="~assets/images/Portrait_small.png" v-morph:ai:picture:3000.tween="morphGroup_picture" />
         </div>
       </q-card-section>
+
+      <!-- AI Picture -->
+      <!-- 
+      <q-card-section class="row items-center justify-center" v-morph:ai:picture="morphGroup_picture">
+        <div style="width: 45%; aspect-ratio: 1; min-width: 250px;">
+          <q-img src="~assets/images/Portrait_small.png" />
+        </div>
+
+      </q-card-section> -->
 
       <!-- Title -->
       <q-card-section>
@@ -45,10 +55,17 @@
         </q-btn>
 
         <!-- AI -->
-        <q-btn round color="secondary" text-color="primary" :size="$q.screen.gt.sm ? 'lg' : 'md'">
-          <q-icon :size="$q.screen.gt.sm ? 'lg' : 'md'" name="img:/icons/ai/ai_microchip.svg" />
-          <q-badge color="orange" floating>new</q-badge>
+        <q-btn round color="secondary" text-color="primary" :size="$q.screen.gt.sm ? 'lg' : 'md'" @click="ai_usePic">
+          <q-icon :size="$q.screen.gt.sm ? 'lg' : '29px'" name="img:/icons/ai/ai_microchip.svg" />
+          <q-badge color="orange" floating>New</q-badge>
         </q-btn>
+
+        <q-fab round color="secondary" text-color="primary" :padding="$q.screen.gt.sm ? '20px' : 'sm'"
+          icon="img:/icons/ai/ai_microchip.svg" direction="up">
+          <q-icon :size="$q.screen.gt.sm ? 'lg' : 'md'" name="img:/icons/ai/ai_microchip.svg" />
+          <q-badge color="orange" floating>New</q-badge>
+          <q-fab-action icon="alarm"></q-fab-action>
+        </q-fab>
 
       </q-card-actions>
 
@@ -81,16 +98,29 @@
 </style>
 
 <script setup>
-
+import { ref } from 'vue'
 import resumeUrl from 'assets/resume/Resume.pdf?url'
 
+// ai transition
+const morphGroup_picture = ref("regular")
+
+// info
 const subTitle = "INNOVATION / TECHNOLOGY / X06";
 const emailAddress = "contact@gabrieltorcat.com";
 // const emailSubject = "Contact Request";
-const linkedinUrl = "https://www.linkedin.com/in/gabriel-torcat/"
+const linkedinUrl = "https://www.linkedin.com/in/gabriel-torcat/";
 const profile =
   `Firm promoter of Innovation and the Work Smarter and Not Harder Principle. I don't Believe in Problems, I Believe in Solutions. 
   A scientist at heart, I apply critical and strategic thinking to materialize solid and cutting-edge business solutions to improve performance, 
   drive innovation and achieve growth.`;
+
+// ai
+
+function ai_usePic() {
+
+  morphGroup_picture.value = "ai"
+
+
+}
 
 </script>
