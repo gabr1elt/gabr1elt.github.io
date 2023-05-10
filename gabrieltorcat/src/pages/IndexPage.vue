@@ -8,7 +8,6 @@
         <div v-if="!ai_active" style="width: 45%; aspect-ratio: 1; min-width: 250px;">
           <q-avatar style="width: 100%; height: 100%;" color="secondary">
             <img src="~assets/images/Portrait_silouette_small.png" />
-            <!-- <img src="~assets/images/Portrait_circle_small.png"> -->
           </q-avatar>
         </div>
       </q-card-section>
@@ -63,7 +62,7 @@
 
         <!-- AI Next -->
         <q-btn v-if="ai_active" round color="accent" text-color="primary" :size="$q.screen.gt.sm ? 'lg' : 'md'"
-          icon="navigate_next" @click="ai_getRandomImage">
+          icon="navigate_next" @click="ai_getNextImage">
           <q-tooltip :class="$q.screen.lt.sm ? 'q-pa-xs' : ''" class="text-caption" :delay="500" anchor="bottom right"
             self="center middle">Next Image</q-tooltip>
         </q-btn>
@@ -91,15 +90,17 @@
 
         <!-- Image -->
         <q-card-section class="row items-center justify-center">
-          <div style="width: 45%; aspect-ratio: 1; min-width: 250px;">
+          <!-- <div style="width: 45%; aspect-ratio: 1; min-width: 250px;"> -->
+          <div style="width: 70%; min-width: 250px;">
 
-            <q-img :src="ai_image.url">
-              <q-tooltip :class="$q.screen.lt.sm ? 'q-pa-xs' : ''" class="text-caption" :delay="500" anchor="bottom right"
-                self="center middle">{{ ai_image.tooltip }}</q-tooltip>
+            <q-img :src="ai_image.url" style="border-radius: 25px;">
+              <q-tooltip :class="$q.screen.lt.sm ? 'q-pa-xs' : ''" class="text-caption" :delay="500"
+                anchor="center middle" self="center middle">{{ ai_image.info.tooltip }}</q-tooltip>
             </q-img>
 
             <!-- caption -->
-            <div class="text-center text-secondary text-weight-thin text-caption">
+            <div class="text-center text-secondary text-weight-thin text-caption"
+              :class="$q.screen.gt.xs ? ' q-pt-md' : ' q-pt-sm'">
               {{ ai_caption }}
             </div>
 
@@ -109,11 +110,26 @@
         <!-- Info -->
         <q-card-section class="">
           <h2 :class="$q.screen.gt.sm ? 'text-h2 q-my-lg' : 'text-h3 q-my-md'" class="text-left text-secondary">
-            Info
+            Artificial Intelligence
           </h2>
           <div :class="$q.screen.gt.sm ? 'text-body1' : 'text-body2'" class="text-center text-justify text-secondary"
             style="text-indent: 30px">
-            {{ ai_info }}
+            <p class="text-bold">
+              Generative AI diffusion models finetunning and text-to-image generation with DreamBooth, Stable Diffusion
+              and Hugging Face diffusers.
+            </p>
+            <p>
+              Diffusion Models are a type of generative AI that transforms noise into a data sample of interest i.e.
+              images, audio, and even 3d structures like molecules.
+            </p>
+            <p>
+              In this particular example I fine-tune (re-train) with images of myself a general pre-trained image
+              generation model 'Stable Diffusion'. So it esentially learns how to generate a new concept: Me.
+            </p>
+            <p>
+              Check out my code at <a href="https://github.com/gabr1elt/diffusers/tree/dev/examples/dreambooth"
+                target="_blank" rel="noopener noreferrer">Github</a> .
+            </p>
           </div>
         </q-card-section>
 
@@ -139,13 +155,15 @@
 
 <script setup>
 
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import resumeUrl from 'assets/resume/Resume.pdf?url'
+import ai_imagesInfo from 'assets/ai/images.json'
+const ai_imagesImport = import.meta.glob('assets/ai/*.png', { as: 'url', eager: true })
 
 // general
 
 const subTitle = "INNOVATION / TECHNOLOGY / X06";
-const emailAddress = "contact@gabrieltorcat.com";
+const emailAddress = "hello@gabrieltorcat.com";
 // const emailSubject = "Contact Request";
 const linkedinUrl = "https://www.linkedin.com/in/gabriel-torcat/";
 const profile =
@@ -157,89 +175,40 @@ const profile =
 
 const ai_active = ref(false)
 const ai_caption = "AI generated image."
+const ai_intro =
+  `Generative AI diffusion models finetunning and text-to-image generation with DreamBooth, Stable Diffusion and Hugging Face diffusers.
+  Diffusion Models are a type of generative AI that transforms noise into a data sample of interest i.e. images, audio, and even 3d structures like molecules.`;
 const ai_info =
-  `Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae neque ipsum accusamus minima quidem nostrum provident et vitae similique dolorum, corporis quam, rerum animi fuga maiores vero repellendus dicta dolorem.`;
-const ai_images = {
-  "2023-05-08T00:42:49.659567.png": {
-    "tooltip": "aaaaaaa",
-  },
-  "2023-05-08T15:54:20.724023.png": {
-    "tooltip": "aaaaaaa",
-  },
-  "2023-05-09T01:17:54.992698.png": {
-    "tooltip": "aaaaaaa",
-  },
-  "2023-05-09T02:49:53.530992.png": {
-    "tooltip": "aaaaaaa",
-  },
-  "2023-05-09T09:26:07.068974.png": {
-    "tooltip": "aaaaaaa",
-  },
-  "2023-05-09T11:28:30.095897.png": {
-    "tooltip": "aaaaaaa",
-  },
-  "2023-05-09T11:53:16.589587.png": {
-    "tooltip": "aaaaaaa",
-  },
-}
-// import images
-const ai_imagesImport = import.meta.glob('assets/ai/*.png', { as: 'url', eager: true })
-console.log(ai_imagesImport)
-Object.keys(ai_images).forEach((key) =>
-  ai_images[key].url = Object.keys(ai_imagesImport).filter(k => k.includes(key)).map(k => ai_imagesImport[k])[0]
-);
-console.log(ai_images)
-// Object.entries(ai_images).forEach(([k, v]) => { ai_images[k].url = new URL(v.path, import.meta.url).href })
-// const aiImgs = import.meta.glob('assets/ai/*.png', { eager: true })
-// Object.values(aiImgs).forEach((v) => v())
-// Object.keys(aiImgs).forEach((key) => aiImgs[key]());
-// const aiImg = import.meta('assets/ai/2023-05-09T11:53:16.589587.png', { as: 'url', eager: true })
-// console.log(aiImg)
+  `In this particular example I fine-tune (re-train) with images of myself a general pre-trained image generation model 'Stable Diffusion'. So it esentially learns how to generate a new concept: Me.
+  You can check out the code used to generate this at https://github.com/gabr1elt/diffusers.`;
+// shuffle images for better random effect
+const ai_imagesOrder = Object.keys(ai_imagesInfo)
+  .map(value => ({ value, sort: Math.random() }))
+  .sort((a, b) => a.sort - b.sort)
+  .map(({ value }) => value)
 
-
-// // const ai_image = ref(aiImgs[1])
 const ai_image = ref(null)
 
-// for (const path in aiImgs) {
-//   // aiImgs[path]().then((mod) => {
-//   //   console.log(path, mod)
-//   // })
-//   console.log(aiImgs[path])
-//   ai_image.value = aiImgs[path]
-//   console.log(ai_image.value)
+// get next random image
+function ai_getNextImage() {
 
-// }
-// console.log(resumeUrl)
-// resumeUrl
+  if (!ai_image.value) {
+    ai_image.value = { "orderIdx": 0 }
+  }
+  const currentIndex = ai_image.value.orderIdx
 
+  const nextIndex = (currentIndex + 1) % ai_imagesOrder.length;
 
-// for (const [k, v] in Object.entries(ai_images)) {
-//   import('assets/ai/2023-05-09T11:53:16.589587.png?url')
-
-// }
-
-// Object.entries(ai_images).forEach(async ([k, v]) => {
-//   ai_images[k].url = await import(`${v.path}` + '?url')
-// })
-// console.log(ai_images)
-
-// const ai_image = ref(ai_images["2023-05-09T11:28:30.095897.png"].url)
-
-// function getImageUrl(name) {
-//   return new URL(`${name}`, import.meta.url).href
-// }
-// const ai_image = ref(getImageUrl(ai_images[2].path))
-// console.log(ai_image.value)
-
-function ai_getRandomImage() {
-
-  // morphGroupVal.value = "ai"
-  // morphGroupVal.value = morphGroupVal.value === "ai" ? "regular" : "ai"
-
-  const keys = Object.keys(ai_images);
-  ai_image.value = ai_images[keys[keys.length * Math.random() << 0]];
+  // update image values
+  ai_image.value.orderIdx = nextIndex
+  ai_image.value.url = Object.keys(ai_imagesImport).filter(k => k.includes(ai_imagesOrder[nextIndex])).map(k => ai_imagesImport[k])[0]
+  ai_image.value.info = ai_imagesInfo[ai_imagesOrder[nextIndex]]
 
 }
-ai_getRandomImage()
+
+onMounted(() => {
+  // init ai image
+  ai_getNextImage()
+})
 
 </script>
