@@ -5,7 +5,7 @@
 
       <!-- Picture -->
       <q-card-section class="row items-center justify-center">
-        <div style="width: 45%; aspect-ratio: 1; min-width: 250px;" v-if="!ai_active">
+        <div v-if="!ai_active" style="width: 45%; aspect-ratio: 1; min-width: 250px;">
           <q-avatar style="width: 100%; height: 100%;" color="secondary">
             <img src="~assets/images/Portrait_silouette_small.png" />
             <!-- <img src="~assets/images/Portrait_circle_small.png"> -->
@@ -18,8 +18,8 @@
         <h1 :class="$q.screen.gt.sm ? 'text-h1 q-my-lg' : 'text-h2 q-my-md'" class="text-center text-secondary">
           Gabriel Torcat
         </h1>
-        <div :class="$q.screen.gt.sm ? 'text-subtitle1 q-my-md' : 'text-subtitle2 q-my-sm'"
-          class="text-center text-secondary" v-if="!ai_active">
+        <div v-if="!ai_active" :class="$q.screen.gt.sm ? 'text-subtitle1 q-my-md' : 'text-subtitle2 q-my-sm'"
+          class="text-center text-secondary">
           {{ subTitle }}
         </div>
       </q-card-section>
@@ -56,25 +56,17 @@
         <q-btn round :color="ai_active ? 'accent' : 'secondary'" text-color="primary"
           :size="$q.screen.gt.sm ? 'lg' : 'md'" @click="ai_active = !ai_active">
           <q-icon :size="$q.screen.gt.sm ? '42px' : '29px'" name="img:/icons/ai/ai_microchip.svg" />
-          <q-badge color="accent" floating v-if="!ai_active">New</q-badge>
+          <q-badge v-if="!ai_active" color="accent" floating>New</q-badge>
           <q-tooltip :class="$q.screen.lt.sm ? 'q-pa-xs' : ''" class="text-caption" :delay="500" anchor="bottom right"
             self="center middle">Artificial Intelligence</q-tooltip>
         </q-btn>
 
         <!-- AI Next -->
-        <q-btn round color="secondary" text-color="primary" :size="$q.screen.gt.sm ? 'lg' : 'md'" icon="navigate_next"
-          @click="ai_getRandomImage" v-if="ai_active">
+        <q-btn v-if="ai_active" round color="accent" text-color="primary" :size="$q.screen.gt.sm ? 'lg' : 'md'"
+          icon="navigate_next" @click="ai_getRandomImage">
           <q-tooltip :class="$q.screen.lt.sm ? 'q-pa-xs' : ''" class="text-caption" :delay="500" anchor="bottom right"
             self="center middle">Next Image</q-tooltip>
         </q-btn>
-
-        <!-- ????? -->
-        <!-- <q-fab round color="secondary" text-color="primary" :padding="$q.screen.gt.sm ? '20px' : 'sm'"
-          icon="img:/icons/ai/ai_microchip.svg" direction="up">
-          <q-icon :size="$q.screen.gt.sm ? 'lg' : 'md'" name="img:/icons/ai/ai_microchip.svg" />
-          <q-badge color="orange" floating>New</q-badge>
-          <q-fab-action icon="alarm"></q-fab-action>
-        </q-fab> -->
 
       </q-card-actions>
 
@@ -90,7 +82,7 @@
       </q-card-section>
 
       <!-- AI -->
-      <div class="" v-if="ai_active">
+      <div v-if="ai_active" class="">
 
         <!-- Separator -->
         <div :class="$q.screen.gt.xs ? ' q-pa-xl' : ' q-pa-lg'">
@@ -101,9 +93,9 @@
         <q-card-section class="row items-center justify-center">
           <div style="width: 45%; aspect-ratio: 1; min-width: 250px;">
 
-            <q-img :src="ai_image.path">
+            <q-img :src="ai_image.url">
               <q-tooltip :class="$q.screen.lt.sm ? 'q-pa-xs' : ''" class="text-caption" :delay="500" anchor="bottom right"
-                self="center middle">{{ ai_image }}</q-tooltip>
+                self="center middle">{{ ai_image.tooltip }}</q-tooltip>
             </q-img>
 
             <!-- caption -->
@@ -150,12 +142,6 @@
 import { ref } from 'vue'
 import resumeUrl from 'assets/resume/Resume.pdf?url'
 
-// const aiImgs = import.meta.glob('assets/ai/*.png', { as: 'url', eager: true })
-const aiImgs = import.meta.glob('assets/ai/*.png', { eager: true })
-Object.values(aiImgs).forEach((v) => v())
-// Object.keys(aiImgs).forEach((key) => aiImgs[key]());
-
-
 // general
 
 const subTitle = "INNOVATION / TECHNOLOGY / X06";
@@ -174,44 +160,86 @@ const ai_caption = "AI generated image."
 const ai_info =
   `Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae neque ipsum accusamus minima quidem nostrum provident et vitae similique dolorum, corporis quam, rerum animi fuga maiores vero repellendus dicta dolorem.`;
 const ai_images = {
-  1: {
-    "path": "assets/ai/2023-05-08T00:42:49.659567.png",
-    "tooltip": "aaaaaaa"
+  "2023-05-08T00:42:49.659567.png": {
+    "tooltip": "aaaaaaa",
   },
-  2: {
-    "path": "assets/ai/2023-05-08T15:54:20.724023.png",
-    "tooltip": "aaaaaaa"
+  "2023-05-08T15:54:20.724023.png": {
+    "tooltip": "aaaaaaa",
   },
-  3: {
-    "path": "assets/ai/2023-05-09T01:17:54.992698.png",
-    "tooltip": "aaaaaaa"
+  "2023-05-09T01:17:54.992698.png": {
+    "tooltip": "aaaaaaa",
   },
-  4: {
-    "path": "assets/ai/2023-05-09T02:49:53.530992.png",
-    "tooltip": "aaaaaaa"
+  "2023-05-09T02:49:53.530992.png": {
+    "tooltip": "aaaaaaa",
   },
-  5: {
-    "path": "assets/ai/2023-05-09T09:26:07.068974.png",
-    "tooltip": "aaaaaaa"
+  "2023-05-09T09:26:07.068974.png": {
+    "tooltip": "aaaaaaa",
   },
-  6: {
-    "path": "assets/ai/2023-05-09T11:28:30.095897.png",
-    "tooltip": "aaaaaaa"
+  "2023-05-09T11:28:30.095897.png": {
+    "tooltip": "aaaaaaa",
   },
-  7: {
-    "path": "assets/ai/2023-05-09T11:53:16.589587.png",
-    "tooltip": "aaaaaaa"
+  "2023-05-09T11:53:16.589587.png": {
+    "tooltip": "aaaaaaa",
   },
 }
-const ai_image = ref(ai_images[2])
+// import images
+const ai_imagesImport = import.meta.glob('assets/ai/*.png', { as: 'url', eager: true })
+console.log(ai_imagesImport)
+Object.keys(ai_images).forEach((key) =>
+  ai_images[key].url = Object.keys(ai_imagesImport).filter(k => k.includes(key)).map(k => ai_imagesImport[k])[0]
+);
+console.log(ai_images)
+// Object.entries(ai_images).forEach(([k, v]) => { ai_images[k].url = new URL(v.path, import.meta.url).href })
+// const aiImgs = import.meta.glob('assets/ai/*.png', { eager: true })
+// Object.values(aiImgs).forEach((v) => v())
+// Object.keys(aiImgs).forEach((key) => aiImgs[key]());
+// const aiImg = import.meta('assets/ai/2023-05-09T11:53:16.589587.png', { as: 'url', eager: true })
+// console.log(aiImg)
 
 
+// // const ai_image = ref(aiImgs[1])
+const ai_image = ref(null)
+
+// for (const path in aiImgs) {
+//   // aiImgs[path]().then((mod) => {
+//   //   console.log(path, mod)
+//   // })
+//   console.log(aiImgs[path])
+//   ai_image.value = aiImgs[path]
+//   console.log(ai_image.value)
+
+// }
+// console.log(resumeUrl)
+// resumeUrl
+
+
+// for (const [k, v] in Object.entries(ai_images)) {
+//   import('assets/ai/2023-05-09T11:53:16.589587.png?url')
+
+// }
+
+// Object.entries(ai_images).forEach(async ([k, v]) => {
+//   ai_images[k].url = await import(`${v.path}` + '?url')
+// })
+// console.log(ai_images)
+
+// const ai_image = ref(ai_images["2023-05-09T11:28:30.095897.png"].url)
+
+// function getImageUrl(name) {
+//   return new URL(`${name}`, import.meta.url).href
+// }
+// const ai_image = ref(getImageUrl(ai_images[2].path))
+// console.log(ai_image.value)
 
 function ai_getRandomImage() {
 
   // morphGroupVal.value = "ai"
-  morphGroupVal.value = morphGroupVal.value === "ai" ? "regular" : "ai"
+  // morphGroupVal.value = morphGroupVal.value === "ai" ? "regular" : "ai"
+
+  const keys = Object.keys(ai_images);
+  ai_image.value = ai_images[keys[keys.length * Math.random() << 0]];
 
 }
+ai_getRandomImage()
 
 </script>
