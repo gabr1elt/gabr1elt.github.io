@@ -187,17 +187,25 @@ const ai_imagesOrder = Object.keys(ai_imagesInfo)
   .sort((a, b) => a.sort - b.sort)
   .map(({ value }) => value)
 
-const ai_image = ref(null)
+const ai_image = ref({})
 
 // get next random image
 function ai_getNextImage() {
 
-  if (!ai_image.value) {
-    ai_image.value = { "orderIdx": 0 }
-  }
-  const currentIndex = ai_image.value.orderIdx
+  const firstImage = "2023-05-08T00:42:49.659567.png" // obama
+  let nextIndex
 
-  const nextIndex = (currentIndex + 1) % ai_imagesOrder.length;
+  if (!Object.hasOwn(ai_image.value, 'orderIdx')) {
+
+    // init to specific image
+    nextIndex = ai_imagesOrder.findIndex(x => x === firstImage);
+
+  } else {
+
+    // get next random image
+    nextIndex = (ai_image.value.orderIdx + 1) % ai_imagesOrder.length;
+
+  }
 
   // update image values
   ai_image.value.orderIdx = nextIndex
