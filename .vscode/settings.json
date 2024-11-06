@@ -1,0 +1,59 @@
+{
+  "[dockerfile]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "Vue.volar",
+    "editor.formatOnSaveMode": "file"
+  },
+  "ansible.python.interpreterPath": "/opt/venv/bin/python",
+  "cloudcode.autoDependencies": "off",
+  "cloudcode.enableTelemetry": false,
+  "diffEditor.maxComputationTime": 0,
+  "docker.languageserver.formatter.ignoreMultilineInstructions": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "modificationsIfAvailable",
+  "files.autoSave": "onFocusChange",
+  "git.autofetch": true,
+  "git.timeline.showUncommitted": true,
+  "gitlens.telemetry.enabled": false,
+  "notebook.consolidatedOutputButton": false,
+  "notebook.diff.overviewRuler": true,
+  "notebook.lineNumbers": "on",
+  "notebook.outline.showCodeCells": true,
+  "notebook.output.scrolling": true,
+  "notebook.output.textLineLimit": 50,
+  "notebook.scrolling.revealNextCellOnExecute": "firstLine",
+  "notebook.stickyScroll.enabled": true,
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.typeCheckingMode": "standard",
+  "python.formatting.provider": "none",
+  "python.terminal.activateEnvironment": false,
+  "python.testing.pytestEnabled": true,
+  "redhat.telemetry.enabled": false,
+  "remoteHub.commitDirectlyWarning": "off",
+  "resmon.disk.format": "UsedOutOfTotal",
+  "resmon.show.cputemp": true,
+  "resmon.show.disk": true,
+  "settingsSync.ignoredExtensions": [],
+  "telemetry.telemetryLevel": "off",
+  "workbench.colorCustomizations": {
+    "notebook.outputContainerBackgroundColor": "#272732"
+  },
+  "workbench.colorTheme": "Default Dark+",
+  "workbench.editorLargeFileConfirmation": 50,
+  "code-runner.saveFileBeforeRun": true,
+  "code-runner.fileDirectoryAsCwd": true
+}
