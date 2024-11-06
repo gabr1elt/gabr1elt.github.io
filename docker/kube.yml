@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    io.kubernetes.cri-o.ContainerType/vscode: container
+    io.kubernetes.cri-o.TTY/vscode: "true"
+    # io.podman.annotations.infra.name: gabr1elt.github.io-infra
+    io.podman.annotations.autoremove/vscode: "TRUE"
+    io.podman.annotations.init/vscode: "FALSE"
+    io.podman.annotations.privileged/vscode: "FALSE"
+    io.podman.annotations.publish-all/vscode: "FALSE"
+  labels:
+    app: gabr1elt.github.io
+  name: gabr1elt.github.io
+spec:
+  automountServiceAccountToken: false
+  containers:
+  - name: vscode
+    image: localhost/gabr1elt/gabr1elt.github.io/vscode:cpu
+    # ports:
+    # - containerPort: 3000
+    #   hostIP: 127.0.0.1
+    #   hostPort: 3000
+    securityContext:
+      capabilities:
+        drop:
+        - CAP_MKNOD
+        - CAP_NET_RAW
+        - CAP_AUDIT_WRITE
+    stdin: true
+    tty: true
+    volumeMounts:
+    - mountPath: /root/Development
+      name: repository_root
+  enableServiceLinks: false
+  hostname: gabr1elt.github.io
+  # restartPolicy: Never
+  volumes:
+  - hostPath:
+      path: /home/gabriel/Development/gabr1elt.github.io
+      type: Directory
+    name: repository_root
+

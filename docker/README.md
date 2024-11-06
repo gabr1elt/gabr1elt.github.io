@@ -1,16 +1,40 @@
-# gabr1elt.github.io
+# docker
 
-Gabriel Torcat (Web Site) development
+Docker
 
---------
+---
 
 ## Podman
 
-``` bash
+```bash
 
-podman build -f docker/Dockerfile -t gabr1elt/gabr1elt.github.io-dev
+# tests
 
-podman run --rm -v "${HOME}/Development/gabr1elt.github.io:/root/Development:cached" -p 127.0.0.1:3001:3000 -it -h "gabr1elt.github.io-dev" gabr1elt/gabr1elt.github.io-dev
-podman run --rm -v "${HOME}/Development/gabr1elt.github.io:/root/Development:cached" -p 127.0.0.1:3001:3000 -it -h "gabr1elt.github.io-dev" gabr1elt/gabr1elt.github.io-dev /bin/bash
+podman run -it --rm alpine
+
+## pod
+
+podman pod create -h "gabr1elt.github.io" gabr1elt.github.io
+# podman pod create -p 127.0.0.1:3000:3000 -h "gabr1elt.github.io" gabr1elt.github.io
+podman pod rm gabr1elt.github.io
+
+# generate
+
+podman kube generate > "${HOME}/Development/gabr1elt.github.io/docker/kube.yml"
+
+# build
+
+podman kube play --build --context-dir "${HOME}/Development/gabr1elt.github.io" --replace "${HOME}/Development/gabr1elt.github.io/docker/kube.yml"
+
+# run
+
+podman kube play --replace "${HOME}/Development/gabr1elt.github.io/docker/kube.yml"
+# podman kube play --replace --network=slirp4netns:--dns-forward "${HOME}/Development/gabr1elt.github.io/docker/kube.yml"
+
+podman kube down "${HOME}/Development/gabr1elt.github.io/docker/kube.yml"
+
+# attach
+
+podman attach gabr1elt.github.io-vscode
 
 ```
