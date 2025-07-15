@@ -167,7 +167,7 @@ const emailAddress = "hello@gabrieltorcat.com";
 // const emailSubject = "Contact Request";
 const linkedinUrl = "https://www.linkedin.com/in/gabriel-torcat/";
 const profile =
-  `Firm promoter of Innovation and the Work Smarter and Not Harder Principle. I don't Believe in Problems, I Believe in Solutions. 
+  `A firm promoter of innovation and result oriented. I believe in solutions, not in problems. 
   A scientist at heart, I apply critical and strategic thinking to materialize solid and cutting-edge business solutions to improve performance, 
   drive innovation and achieve growth.`;
 
