@@ -1,59 +1,370 @@
 {
   "[dockerfile]": {
-    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+    "editor.defaultFormatter": "ms-azuretools.vscode-containers",
+  },
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "gitlens.codeLens.scopes": ["document"],
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
   },
   "[python]": {
-    "editor.defaultFormatter": "ms-python.black-formatter"
+    "editor.defaultFormatter": "ms-python.black-formatter",
   },
-  "[vue]": {
-    "editor.defaultFormatter": "Vue.volar",
-    "editor.formatOnSaveMode": "file"
+  "[shellscript]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format",
   },
-  "ansible.python.interpreterPath": "/opt/venv/bin/python",
-  "cloudcode.autoDependencies": "off",
-  "cloudcode.enableTelemetry": false,
-  "diffEditor.maxComputationTime": 0,
-  "docker.languageserver.formatter.ignoreMultilineInstructions": true,
+  "[sql]": {
+    "editor.defaultFormatter": "inferrinizzard.prettier-sql-vscode",
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "better-comments.highlightPlainText": true,
+  "better-comments.tags": [
+    {
+      "color": "#BF80FF",
+      "tag": "TODO",
+    },
+    {
+      "color": "#DDA0DD",
+      "italic": true,
+      "tag": "[ ]",
+    },
+    {
+      "color": "#D8BFD8",
+      "italic": true,
+      "tag": "[x]",
+    },
+    {
+      "color": "#b5b824",
+      "tag": "FIX",
+    },
+    {
+      "color": "#FF4141",
+      "tag": "BUG",
+    },
+  ],
+  "chat.agentSessionsViewLocation": "view",
+  "chat.checkpoints.showFileChanges": true,
+  "chat.edits2.enabled": true,
+  "chat.emptyState.history.enabled": true,
+  "chat.extensionTools.enabled": false,
+  "chat.implicitContext.enabled": {
+    "panel": "never",
+  },
+  "chat.mcp.serverSampling": {
+    "Global in Code: github": {
+      "allowedModels": [
+        "copilot/claude-3.5-sonnet",
+        "copilot/gemini-2.0-flash-001",
+        "copilot/gemini-2.5-pro",
+        "copilot/gpt-4.1",
+        "copilot/gpt-4o",
+        "copilot/gpt-5-mini",
+        "copilot/o3-mini",
+      ],
+    },
+  },
+  "code-runner.enableAppInsights": false,
+  "code-runner.fileDirectoryAsCwd": true,
+  "code-runner.saveFileBeforeRun": true,
+  "containers.containers.description": ["Status", "Image"],
+  "containers.containers.groupBy": "None",
+  "containers.containers.label": "ContainerName",
+  "containers.contexts.description": ["DockerEndpoint", "Description"],
+  "containers.contexts.showInStatusBar": true,
+  "containers.images.description": ["CreatedTime", "Size", "ImageId"],
+  "debug.toolBarLocation": "commandCenter",
+  "diffEditor.experimental.showMoves": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "diffEditor.maxComputationTime": 10000,
+  "docker.lsp.telemetry": "off",
+  "editor.cursorSmoothCaretAnimation": "explicit",
+  "editor.fontFamily": "'Fira Code', 'Droid Sans Mono', 'monospace', monospace",
+  "editor.fontLigatures": "'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'cv26'",
   "editor.formatOnSave": true,
   "editor.formatOnSaveMode": "modificationsIfAvailable",
+  "editor.hover.delay": 500,
+  "editor.inlineSuggest.enabled": false,
+  "editor.inlineSuggest.experimental.showOnSuggestConflict": "whenSuggestListIsIncomplete",
+  "editor.minimap.showSlider": "always",
+  "editor.rulers": [80],
+  "editor.smoothScrolling": true,
+  "files.associations": {
+    ".prefectignore": "ignore",
+    "#[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9] - *": "log",
+  },
   "files.autoSave": "onFocusChange",
-  "git.autofetch": true,
+  "git.autofetch": "all",
+  "git.replaceTagsWhenPull": true,
   "git.timeline.showUncommitted": true,
+  "github.copilot.chat.agent.currentEditorContext.enabled": false,
+  "github.copilot.chat.agent.thinkingTool": true,
+  "github.copilot.chat.commitMessageGeneration.instructions": [
+    // https://www.conventionalcommits.org/en/v1.0.0/
+    // https://cbea.ms/git-commit/
+    {
+      "text": "Do NOT use Markdown.",
+    },
+    {
+      "text": "The whole text MUST be comprised of ONLY one subject line and ONLY one body.",
+    },
+    {
+      "text": "The subject line MUST be prefixed with a type, which consists of a lowercase noun: feat, fix, etc., followed by the REQUIRED scope, OPTIONAL !, and REQUIRED terminal colon and space.",
+    },
+    {
+      "text": "The type feat MUST be used when a commit adds a new feature to your application or library.",
+    },
+    {
+      "text": "The type fix MUST be used when a commit represents a bug fix for your application.",
+    },
+    {
+      "text": "Types other than feat and fix MAY be used in your commit messages, e.g., chore, docs, style, refactor, perf, test.",
+    },
+    {
+      "text": "A scope MUST consist of one noun describing a section of the codebase surrounded by parenthesis.",
+    },
+    {
+      "text": "The noun MUST be a single word comprised only of alphanumerical characters.",
+    },
+    {
+      "text": "Limit the noun to 15 characters.",
+    },
+    {
+      "text": "Breaking changes MUST be indicated by a ! immediately before the :, in the type/scope prefix.",
+    },
+    {
+      "text": "A description MUST immediately follow the colon and space after the type/scope prefix.",
+    },
+    {
+      "text": "The description is a short summary of all the code changes in all the files.",
+    },
+    {
+      "text": "The description MUST mention all changed files.",
+    },
+    {
+      "text": "Capitalize the first word of the description.",
+    },
+    {
+      "text": "Use the imperative mood in the description.",
+    },
+    {
+      "text": "Limit the subject line to 100 characters.",
+    },
+    {
+      "text": "Do not end the subject line with a period.",
+    },
+    {
+      "text": "The body MUST follow the subject line, providing additional contextual information about the code changes.",
+    },
+    {
+      "text": "The body MUST begin one blank line after the subject line.",
+    },
+    {
+      "text": "Use the body to explain what changed vs. how it changed.",
+    },
+    {
+      "text": "Wrap the body at 72 characters.",
+    },
+    {
+      "text": "The body MUST contain only one paragraph for each changed file.",
+    },
+    {
+      "text": "Each paragraph of the body MUST contain the name of changed file it is reffering to.",
+    },
+    {
+      "text": "Separate each paragraph in the body with a blank line.",
+    },
+    {
+      "text": "One or more footers MAY be provided one blank line after the body.",
+    },
+    {
+      "text": "Each footer MUST consist of a word token, followed by either a :<space> or <space># separator, followed by a string value.",
+    },
+    {
+      "text": "A footer’s token MUST use the hyphen character in place of whitespace characters.",
+    },
+  ],
+  "github.copilot.chat.generateTests.codeLens": true,
+  "github.copilot.chat.notebook.enhancedNextEditSuggestions.enabled": true,
+  "github.copilot.chat.notebook.followCellExecution.enabled": true,
+  "github.copilot.chat.terminalChatLocation": "terminal",
+  "github.copilot.enable": {
+    "*": true,
+    "markdown": true,
+    "plaintext": true,
+    "scminput": false,
+  },
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "githubIssues.createIssueTriggers": ["TODO", "BUG", "FIX"],
+  "githubPullRequests.assignCreated": "${user}",
+  "githubPullRequests.codingAgent.autoCommitAndPush": false,
+  "githubPullRequests.codingAgent.uiIntegration": true,
+  "githubPullRequests.defaultCommentType": "single",
+  "githubPullRequests.defaultCreateOption": "create",
+  "githubPullRequests.experimental.notificationsMarkPullRequests": "markAsRead",
+  "githubPullRequests.notifications": "pullRequests",
+  "githubPullRequests.showPullRequestNumberInTree": true,
+  "gitlens.ai.generateCommitMessage.customInstructions": "Do NOT use Markdown. The whole text MUST be comprised of ONLY one subject line and ONLY one body. The subject line MUST be prefixed with a type, which consists of a lowercase noun: feat, fix, etc., followed by the REQUIRED scope, OPTIONAL !, and REQUIRED terminal colon and space. The type feat MUST be used when a commit adds a new feature to your application or library. The type fix MUST be used when a commit represents a bug fix for your application. Types other than feat and fix MAY be used in your commit messages, e.g., chore, docs, style, refactor, perf, test. A scope MUST consist of one noun describing a section of the codebase surrounded by parenthesis. The noun MUST be a single word comprised only of alphanumerical characters. Limit the noun to 15 characters. Breaking changes MUST be indicated by a ! immediately before the :, in the type/scope prefix. A description MUST immediately follow the colon and space after the type/scope prefix. The description is a short summary of all the code changes in all the files. The description MUST mention all changed files. Capitalize the first word of the description. Use the imperative mood in the description. Limit the subject line to 100 characters. Do not end the subject line with a period. The body MUST follow the subject line, providing additional contextual information about the code changes. The body MUST begin one blank line after the subject line. Use the body to explain what changed vs. how it changed. Wrap the body at 72 characters. The body MUST contain only one paragraph for each changed file. Each paragraph of the body MUST contain the name of changed file it is reffering to. Separate each paragraph in the body with a blank line. One or more footers MAY be provided one blank line after the body. Each footer MUST consist of a word token, followed by either a :<space> or <space># separator, followed by a string value. A footer’s token MUST use the hyphen character in place of whitespace characters.",
+  "gitlens.ai.model": "vscode",
+  "gitlens.ai.vscode.model": "ollama:Ollama",
+  "gitlens.launchpad.indicator.enabled": false,
   "gitlens.telemetry.enabled": false,
+  "gitlens.views.repositories.showStashes": true,
+  "gitlens.views.scm.grouped.views": {
+    "branches": true,
+    "commits": true,
+    "contributors": true,
+    "fileHistory": false,
+    "launchpad": true,
+    "remotes": true,
+    "repositories": false,
+    "searchAndCompare": false,
+    "stashes": true,
+    "tags": true,
+    "worktrees": true,
+  },
+  "inlineChat.enableV2": true,
+  "inlineChat.holdToSpeech": false,
+  "jupyter.pythonExportMethod": "nbconvert",
+  "jupyter.showOutlineButtonInNotebookToolbar": false,
+  "jupyter.showVariableViewWhenDebugging": true,
+  "jupyter.themeMatplotlibPlots": true,
+  "markdownlint.configFile": ".markdownlint.yaml",
   "notebook.consolidatedOutputButton": false,
+  "notebook.diff.ignoreMetadata": true,
+  "notebook.diff.ignoreOutputs": true,
   "notebook.diff.overviewRuler": true,
+  "notebook.formatOnSave.enabled": true,
+  "notebook.insertToolbarLocation": "betweenCells",
   "notebook.lineNumbers": "on",
+  "notebook.multiCursor.enabled": true,
   "notebook.outline.showCodeCells": true,
+  "notebook.outline.showMarkdownHeadersOnly": false,
   "notebook.output.scrolling": true,
   "notebook.output.textLineLimit": 50,
   "notebook.scrolling.revealNextCellOnExecute": "firstLine",
   "notebook.stickyScroll.enabled": true,
+  "notebook.variablesView": true,
+  "podmanager.composePath": "docker-compose",
+  "podmanager.enablePushCommand": true,
+  "Prettier-SQL.keywordCase": "upper",
+  "pylint.args": ["--disable=logging-fstring-interpolation"],
+  "python.analysis.autoFormatStrings": true,
   "python.analysis.autoImportCompletions": true,
-  "python.analysis.typeCheckingMode": "standard",
-  "python.formatting.provider": "none",
+  "python.analysis.completeFunctionParens": true,
+  "python.analysis.exclude": ["**/data"],
+  "python.analysis.inlayHints.callArgumentNames": "all",
+  "python.analysis.inlayHints.functionReturnTypes": true,
+  "python.analysis.inlayHints.pytestParameters": true,
+  "python.analysis.packageIndexDepths": [
+    {
+      "depth": 3,
+      // "includeAllSymbols": true
+      "name": "",
+    },
+  ],
+  "python.analysis.supportDocstringTemplate": true,
+  "python.analysis.typeCheckingMode": "basic",
+  "python.experiments.optInto": ["pythonTestAdapter"],
   "python.terminal.activateEnvironment": false,
+  "python.testing.pytestArgs": ["--color=yes"],
   "python.testing.pytestEnabled": true,
   "redhat.telemetry.enabled": false,
-  "remoteHub.commitDirectlyWarning": "off",
+  "remoteHub.commitDirectlyWarning": "auto",
   "resmon.disk.format": "UsedOutOfTotal",
   "resmon.show.cputemp": true,
   "resmon.show.disk": true,
-  "settingsSync.ignoredExtensions": [],
-  "telemetry.telemetryLevel": "off",
-  "workbench.colorCustomizations": {
-    "notebook.outputContainerBackgroundColor": "#272732"
+  "scm.alwaysShowRepositories": true,
+  "scm.defaultViewMode": "tree",
+  "scm.diffDecorationsGutterPattern": {
+    "modified": false,
   },
-  "workbench.colorTheme": "Default Dark+",
-  "workbench.editorLargeFileConfirmation": 50,
-  "code-runner.saveFileBeforeRun": true,
-  "code-runner.fileDirectoryAsCwd": true
+  "scm.repositories.sortOrder": "path",
+  "sonarlint.disableTelemetry": true,
+  "sonarlint.rules": {
+    "python:S1135": {
+      "level": "off",
+    },
+  },
+  "sqlite.recordsPerPage": 1000,
+  "sqltools.historySize": 1000,
+  "sqltools.results.limit": 1000,
+  "sqltools.sortColumns": "ordinalnumber",
+  "task.allowAutomaticTasks": "off",
+  "telemetry.feedback.enabled": false,
+  "telemetry.telemetryLevel": "off",
+  "terminal.integrated.confirmOnKill": "always",
+  "terminal.integrated.cursorBlinking": true,
+  "terminal.integrated.enableImages": true,
+  "terminal.integrated.enableVisualBell": true,
+  "terminal.integrated.fontLigatures.enabled": true,
+  "terminal.integrated.fontLigatures.featureSettings": "\"ss03\", \"ss04\", \"ss05\", \"ss06\", \"ss07\", \"cv26\"",
+  "terminal.integrated.persistentSessionScrollback": 1000,
+  "terminal.integrated.scrollback": 10000,
+  "terminal.integrated.shellIntegration.environmentReporting": true,
+  "terminal.integrated.shellIntegration.history": 1000,
+  "terminal.integrated.smoothScrolling": true,
+  "terminal.integrated.stickyScroll.enabled": true,
+  "terminal.integrated.stickyScroll.maxLineCount": 3,
+  // BUG: intellisense casus terminal to crash. (re-examine once no longer in preview)
+  // "terminal.integrated.suggest.enabled": true,
+  "terminal.integrated.tabs.focusMode": "singleClick",
+  "terminal.integrated.tabs.title": "${shellCommand}",
+  "testing.automaticallyOpenPeekView": "failureInVisibleDocument",
+  "testing.automaticallyOpenTestResults": "openOnTestFailure",
+  "todo-tree.general.schemes": [
+    "file",
+    "ssh",
+    "untitled",
+    "vscode-notebook-cell",
+    "vscode-userdata",
+  ],
+  "todo-tree.general.showActivityBarBadge": true,
+  "todo-tree.general.statusBar": "tags",
+  "todo-tree.general.tags": ["TODO", "FIX", "BUG"],
+  "todo-tree.highlights.backgroundColourScheme": [
+    "#BF80FF",
+    "#8c8f03",
+    "#FF4141",
+  ],
+  "todo-tree.highlights.foregroundColourScheme": ["#ffffff", "#ffffff"],
+  "todo-tree.highlights.useColourScheme": true,
+  "todo-tree.tree.showCountsInTree": true,
+  "vscode-color-picker.languages": [
+    "javascript",
+    "json",
+    "jsonc",
+    "markdown",
+    "python",
+    "shellscript",
+    "toml",
+    "typescript",
+    "yaml",
+  ],
+  "workbench.colorCustomizations": {
+    "editorRuler.foreground": "#8181811b",
+  },
+  "workbench.colorTheme": "Visual Studio Dark",
+  "workbench.editorLargeFileConfirmation": 25,
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.list.smoothScrolling": true,
+  "yaml.schemas": {
+    "https://raw.githubusercontent.com/continuedev/continue/main/extensions/vscode/config_schema.json": "continue.yaml",
+    "https://raw.githubusercontent.com/evilmartians/lefthook/master/schema.json": "{.lefthook,lefthook,lefthook-local,.lefthook-local}.{yml,yaml,toml,json}",
+  },
 }
