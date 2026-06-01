@@ -156,7 +156,7 @@
 <script setup>
 
 import { ref, onMounted } from 'vue'
-import resumeUrl from 'assets/resume/Resume.pdf?url'
+// import resumeUrl from 'assets/resume/Resume.pdf?url'
 import ai_imagesInfo from 'assets/ai/images.json'
 const ai_imagesImport = import.meta.glob('assets/ai/*.png', { as: 'url', eager: true })
 
